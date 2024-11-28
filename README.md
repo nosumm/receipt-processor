@@ -1,6 +1,8 @@
 # Receipt Processor
 Project Structure
 
+```markdown
+```plaintext
 receipt-processor/
 │
 ├── main.go                 # Main application entry point
@@ -20,6 +22,8 @@ receipt-processor/
 |
 ├── Dockerfile              # Docker configuration
 └── go.mod                  # Go module dependencies
+```
+```
 
 
 # Dependency Management:
