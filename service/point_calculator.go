@@ -55,11 +55,15 @@ func CalculatePoints(receipt *models.Receipt) int {
 func countAlphanumericChars(s string) int {
     count := 0
     for _, ch := range s {
-        if unicode.IsLetterOrNumber(ch) {
+        if IsLetterorNumber(ch) {
             count++
         }
     }
     return count
+}
+
+func IsLetterorNumber(r rune) bool {
+    return unicode.IsLetter(r) || unicode.IsNumber(r)
 }
 
 func isRoundDollarAmount(total string) bool {
@@ -70,13 +74,14 @@ func isRoundDollarAmount(total string) bool {
     return math.Mod(amount, 1.0) == 0
 }
 
-func isMultipleOf025(total string) bool {
+func isMultipleof025(total string) bool {
     amount, err := strconv.ParseFloat(total, 64)
     if err != nil {
         return false
     }
     return math.Mod(amount*4, 1.0) == 0
 }
+
 
 func calculateDescriptionPoints(item models.Item) int {
     // Remove leading/trailing whitespace from description and check length
@@ -91,7 +96,7 @@ func calculateDescriptionPoints(item models.Item) int {
     return 0
 }
 
-
+/*
 func isPurchaseDayOdd(dateStr string) bool {
     date, err := time.Parse("2006-01-02", dateStr)
     if err != nil {
@@ -99,8 +104,14 @@ func isPurchaseDayOdd(dateStr string) bool {
     }
     return date.Day()%2 != 0
 }
+*/
+func isPurchaseDayOdd(purchaseDate time.Time) bool {
+    day := purchaseDate.Day() // Get the day of the month
+    return day%2 != 0
+}
 
-func isPurchaseTimeBetween2And4PM(timeStr string) bool {
+/*
+func isPurchaseTimeInRange(timeStr string) bool {
     t, err := time.Parse("15:04", timeStr)
     if err != nil {
         return false
@@ -111,4 +122,15 @@ func isPurchaseTimeBetween2And4PM(timeStr string) bool {
     
     return t.After(startTime) && t.Before(endTime)
 }
+*/
 
+
+// isPurchaseTimeInRange checks if the given time is within the specified range
+func isPurchaseTimeInRange(purchaseTime time.Time) bool {
+	// Define the start and end times (only time part matters here)
+	startTime := time.Date(1, 1, 1, 14, 0, 0, 0, time.UTC) // 14:00
+	endTime := time.Date(1, 1, 1, 16, 0, 0, 0, time.UTC)   // 16:00
+	
+	// Check if the purchase time is after the start time and before the end time
+	return purchaseTime.After(startTime) && purchaseTime.Before(endTime)
+}

@@ -1,5 +1,3 @@
-// HTTP route handler for processing receipts
-
 package handlers
 
 import (
@@ -8,31 +6,24 @@ import (
 	"net/http"
 
 	"receipt-processor/models"
-	"receipt-processor/service"
 	"receipt-processor/storage"
 )
 
-// processes incoming receipts
-// uses a receipt store to save and manage receipts
-type ProcessReceiptHandler struct {
-	store *storage.ReceiptStore
-}
-
-// creates a new handler for processing receipts
-// takes a receipt store as a parameter to manage receipt storage
-func NewProcessReceiptHandler(store *storage.ReceiptStore) *ProcessReceiptHandler {
+// NewProcessReceiptHandler creates a new handler for processing receipts
+// It takes a receipt store as a parameter to manage receipt storage
+func NewProcessReceiptHandler(store *storage.ReceiptStore) http.Handler {
 	return &ProcessReceiptHandler{
 		store: store,
 	}
 }
 
+// ProcessReceiptHandler manages the processing of receipts
+// It uses a receipt store to save and manage receipts
+type ProcessReceiptHandler struct {
+	store *storage.ReceiptStore
+}
+
 // ServeHTTP implements the http.Handler interface for processing receipt requests
-// It handles the following responsibilities:
-// 1. Validate the HTTP method is POST
-// 2. Decode the incoming JSON receipt
-// 3. Validate the receipt data
-// 4. Save the receipt to the store
-// 5. Return the generated receipt ID
 func (h *ProcessReceiptHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Ensure only POST method is allowed
 	if r.Method != http.MethodPost {
@@ -74,36 +65,21 @@ func (h *ProcessReceiptHandler) ServeHTTP(w http.ResponseWriter, r *http.Request
 }
 
 // validateReceipt performs comprehensive validation on the receipt
-// checks for:
-// 1. Non-nil receipt
-// 2. Required retailer ID
-// 3. Valid purchase date
-// 4. Presence of items
-// Returns an error if any validation fails
 func validateReceipt(receipt *models.Receipt) error {
-	// Check if receipt is nil
-	if receipt == nil {
-		return fmt.Errorf("receipt cannot be nil")
-	}
-	
-	// Validate retailer ID is present
+	// Ensure the receipt has valid data
 	if receipt.RetailerId == "" {
 		return fmt.Errorf("retailer ID is required")
 	}
 
-	// Validate purchase date is not zero value
+	// Validate that PurchaseDate is a valid time (not zero)
 	if receipt.PurchaseDate.IsZero() {
 		return fmt.Errorf("purchase date is required")
 	}
 
-	// Ensure receipt has at least one item
+	// Ensure the receipt contains at least one item
 	if len(receipt.Items) == 0 {
 		return fmt.Errorf("receipt must contain at least one item")
 	}
 
-	// Additional validation can be added here
-	// For example, check for valid total amount, item prices, etc.
-
 	return nil
 }
-

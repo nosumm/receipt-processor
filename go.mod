@@ -1,6 +1,8 @@
-//Go module dependencies
+module receipt-processor
 
-go mod init receipt-processor
-go get github.com/google/uuid
-// routing library
-go get github.com/gorilla/mux
+go 1.18
+
+require (
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/gorilla/mux v1.8.1 // indirect
+)

@@ -1,6 +1,6 @@
-M golang:1.21-alpine
+FROM golang:1.21-alpine
 
-WORKDIR /app
+WORKDIR /home/nstave/receipt-processor
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
