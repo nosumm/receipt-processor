@@ -3,24 +3,23 @@ Project Structure
 
 receipt-processor/
 │
-├── main.go                 # Main application entry point      
+├── main.go                 # Main application entry point
 ├── handlers/               # HTTP route handlers               
-│   ├── process_receipt.go  # Handler for processing receipts  
-│   └── get_points.go       # Handler for retrieving points     
+│   ├── process_receipt.go  # Handler for processing receipts
+│   └── get_points.go       # Handler for retrieving points
 │
-├── models/                 # Data models                       
+├── models/                 # Data models
 │   ├── receipt.go          # Receipt struct definitions
 │   └── item.go             # Item struct definitions
 │
-├── service/                # Point Calc logic                  
+├── service/                # Point Calc logic
 │   └── point_calculator.go # Logic for calculating receipt points
 │
-├── storage/                # In-memory storage                 
+├── storage/                # In-memory storage
 │   └── receipt_store.go    # In-memory receipt storage
-│
+|
 ├── Dockerfile              # Docker configuration
 └── go.mod                  # Go module dependencies
-
 
 
 # Dependency Management:
