@@ -2,7 +2,6 @@
 Project Structure
 
 ```markdown
-```plaintext
 receipt-processor/
 │
 ├── main.go                 # Main application entry point
