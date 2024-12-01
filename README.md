@@ -1,6 +1,5 @@
 # Receipt Processor
 Project Structure
-
 ```markdown
 receipt-processor/
 │
@@ -21,30 +20,20 @@ receipt-processor/
 ├── Dockerfile              # Docker configuration
 └── go.mod                  # Go module dependencies
 ```
-```
 
+Run the application with: 
+```markdown 
+$ ./run.sh
+or
+$ go mod init receipt-processor
+$ go get github.com/google/uuid  # For generating unique IDs
+$ go get github.com/gorilla/mux  # For routing 
 
-# To build and run the application run the run.sh file or do the following:
-
-# dependencies 
-go mod init receipt-processor
-go get github.com/google/uuid  # For generating unique IDs
-go get github.com/gorilla/mux  # For routing 
-
-# Running the Application
-Running the Application:
-
-# Build Docker image
-docker build -t receipt-processor .
-
-# Run the Docker container
-docker run -p 8080:8080 receipt-processor
-
-
-Visit home page: http://localhost:8080 
-
+$ docker build -t receipt-processor .
+$ docker run -p 8080:8080 receipt-processor
+``` 
 Example: 
-
+```markdown 
 $ curl -X POST http://localhost:8080/process-receipt -d '{
   "Retailer": "My Retailer",
   "PurchaseDate": "2024-11-28T10:30:00Z", 
