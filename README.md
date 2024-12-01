@@ -9,9 +9,8 @@ receipt-processor/
 │   ├── process_receipt.go  # Handler for processing receipts
 │   └── get_points.go       # Handler for retrieving points
 │
-├── models/                 # Data models
-│   ├── receipt.go          # Receipt struct definitions
-│   └── item.go             # Item struct definitions
+├── models/                 # struct definitions 
+│   ├── receipt.go          
 │
 ├── service/                
 │   └── point_calculator.go # Logic for calculating receipt points
