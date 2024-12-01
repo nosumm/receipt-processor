@@ -13,7 +13,7 @@ receipt-processor/
 │   ├── receipt.go          # Receipt struct definitions
 │   └── item.go             # Item struct definitions
 │
-├── service/                # Point Calc logic
+├── service/                
 │   └── point_calculator.go # Logic for calculating receipt points
 │
 ├── storage/                # In-memory storage
@@ -25,8 +25,9 @@ receipt-processor/
 ```
 
 
-# Dependency Management:
+# To build and run the application run the run.sh file or do the following:
 
+# dependencies 
 go mod init receipt-processor
 go get github.com/google/uuid  # For generating unique IDs
 go get github.com/gorilla/mux  # For routing 
@@ -41,24 +42,30 @@ docker build -t receipt-processor .
 docker run -p 8080:8080 receipt-processor
 
 
-# Implementation 
 
-1. Point Calculation                          - complete
-2. Models                                     - complete
-3. Storage Mechanism                          - complete
-4. Main App Structure                         - complete?
-5. Handlers                                   - complete
-6. Routing                                    - complete?
-    - POST endpoint at /receipts/process
-    - GET endpoint at /receipts/{id}/points
-7. Error Handling                             - complete?
+Example: 
 
-additional implementation to-do:
+$ curl -X POST http://localhost:8080/process-receipt -d '{
+  "Retailer": "My Retailer",
+  "PurchaseDate": "2024-11-28T10:30:00Z", 
+  "PurchaseTime": "2024-11-28T10:30:00Z",
+  "Items": [
+    {
+      "shortDescription": "Item 1",
+      "price": "10.00"
+    },
+    {
+      "shortDescription": "Item 2",
+      "price": "20.50"
+    }
+  ],
+  "Total": "30.50",
+  "RetailerId": "123"
+}' -H "Content-Type: application/json"
 
-Add input validation (matching API spec)
-Write unit tests
-Add logging
-Implement graceful shutdown
-Add middleware for logging and recovery
-integration tests for routing endpoints
+{"id":"22205988-20ad-42ce-9c43-804766bd019e"}
+
+$ curl http://localhost:8080/get-points/22205988-20ad-42ce-9c43-804766bd019e
+
+{"points":47}
 
