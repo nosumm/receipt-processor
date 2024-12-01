@@ -24,20 +24,17 @@ receipt-processor/
 ```
 
 
-# To build and run the application run the run.sh file or do the following:
+Run the application by running the run.sh file or do the following: 
 
-# dependencies 
+Dependencies 
 go mod init receipt-processor
 go get github.com/google/uuid  # For generating unique IDs
 go get github.com/gorilla/mux  # For routing 
 
-# Running the Application
-Running the Application:
-
-# Build Docker image
+Build Docker image
 docker build -t receipt-processor .
 
-# Run the Docker container
+Run the Docker container
 docker run -p 8080:8080 receipt-processor
 
 
