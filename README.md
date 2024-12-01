@@ -21,8 +21,6 @@ receipt-processor/
 ├── Dockerfile              # Docker configuration
 └── go.mod                  # Go module dependencies
 ```
-```
-
 
 Run the application with: $ ./run.sh
 or
@@ -35,7 +33,7 @@ $ docker build -t receipt-processor .
 $ docker run -p 8080:8080 receipt-processor
 
 Example: 
-
+```markdown 
 $ curl -X POST http://localhost:8080/process-receipt -d '{
   "Retailer": "My Retailer",
   "PurchaseDate": "2024-11-28T10:30:00Z", 
