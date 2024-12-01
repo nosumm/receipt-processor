@@ -32,6 +32,8 @@ $ go get github.com/gorilla/mux  # For routing
 $ docker build -t receipt-processor .
 $ docker run -p 8080:8080 receipt-processor
 ``` 
+Visit home page: http://localhost:8080
+
 Example: 
 ```markdown 
 $ curl -X POST http://localhost:8080/process-receipt -d '{
