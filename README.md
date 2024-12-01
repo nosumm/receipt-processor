@@ -1,6 +1,5 @@
 # Receipt Processor
 Project Structure
-
 ```markdown
 receipt-processor/
 │
@@ -22,16 +21,17 @@ receipt-processor/
 └── go.mod                  # Go module dependencies
 ```
 
-Run the application with: $ ./run.sh
+Run the application with: 
+```markdown 
+$ ./run.sh
 or
-
 $ go mod init receipt-processor
 $ go get github.com/google/uuid  # For generating unique IDs
 $ go get github.com/gorilla/mux  # For routing 
 
 $ docker build -t receipt-processor .
 $ docker run -p 8080:8080 receipt-processor
-
+``` 
 Example: 
 ```markdown 
 $ curl -X POST http://localhost:8080/process-receipt -d '{
